@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.jpg">
+  <link rel="mask-icon" href="/images/icon.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.pisho.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="与 HTML 以及 HTML5 有关的笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML学了什么？">
+<meta property="og:url" content="http://www.pisho.me/2020/05/22/HTML%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88/index.html">
+<meta property="og:site_name" content="Pisho&#39;Blogs">
+<meta property="og:description" content="与 HTML 以及 HTML5 有关的笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.w3school.com.cn/i/dom_navigate.gif">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2013/07/html5-layout.jpg">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2019/04/3793073884-56950753e65db_articlex.png">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2016/03/ws.png">
+<meta property="article:published_time" content="2020-05-22T08:22:10.000Z">
+<meta property="article:modified_time" content="2020-12-23T14:41:13.040Z">
+<meta property="article:author" content="Pisho">
+<meta property="article:tag" content="学习前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.w3school.com.cn/i/dom_navigate.gif">
+
+<link rel="canonical" href="http://www.pisho.me/2020/05/22/HTML%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>HTML学了什么？ | Pisho'Blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Pisho'Blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Daily Notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.pisho.me/2020/05/22/HTML%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon.jpg">
+      <meta itemprop="name" content="Pisho">
+      <meta itemprop="description" content="本站看运气访问进来,主要是本人的一些学习笔记,一般没有什么干货。不过还是希望能够帮助你学习到什么。由于域名到期，所以换成了 MOE 二次元域名。😄">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pisho'Blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTML学了什么？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 16:22:10" itemprop="dateCreated datePublished" datetime="2020-05-22T16:22:10+08:00">2020-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-23 22:41:13" itemprop="dateModified" datetime="2020-12-23T22:41:13+08:00">2020-12-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">与 HTML 以及 HTML5 有关的笔记</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="HTML-整理"><a href="#HTML-整理" class="headerlink" title="HTML 整理"></a>HTML 整理</h1><p>HTML 只是一个标记性的语言，本身没有什么学习难度，HTML5 是新一代的 HTML 标准，实现了一些新的元素和属性， 改进了本地存储并且添加了很多语义元素，使得代码或者页面更加语义化。语义化的好处在于对代码的理解更加简单，同时也为视力障碍人士改善了网页的可阅读性。</p>
+<p>关于更多的细节参考 <a target="_blank" rel="noopener" href="https://www.runoob.com/html/html-tutorial.html">https://www.runoob.com/html/html-tutorial.html</a></p>
+<h2 id="HTML-DOM"><a href="#HTML-DOM" class="headerlink" title="HTML DOM"></a>HTML DOM</h2><p>关于 DOM 的理解可以参考 <a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction">https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction</a></p>
+<p>DOM 是文档对象模型的缩写，按照对对象的理解，DOM 就是浏览器生成的这个页面的对象，每一个 HTML 元素就是一个节点，通过 HTML 的嵌套关系生成子节点和父节点关系的树，元素的属性也是元素对应节点的子节点。</p>
+<p>DOM 的树并不是普通的二叉树或者特殊的树</p>
+<p><img src="https://www.w3school.com.cn/i/dom_navigate.gif" alt="DOM 节点关系"></p>
+<p>关系其实还是挺复杂的。不过 DOM 提供了各种方法实现了对于节点或者元素的选择、修改。</p>
+<p>获取目标元素节点是对于 JavaScript 脚本比较重要的一环，获取到节点后即可对节点所产生的事件进行脚本控制。</p>
+<p>当然在 Vue 或者 React 等框架中有对应的方法可以更加方便的获取节点添加事件。</p>
+<h3 id="CSS-DOM"><a href="#CSS-DOM" class="headerlink" title="CSS DOM"></a>CSS DOM</h3><p>css 也是有一个 DOM 树的通过将两棵树合并生成一个渲染树供浏览器对页面进行渲染。</p>
+<h2 id="HTML5-的更新"><a href="#HTML5-的更新" class="headerlink" title="HTML5 的更新"></a>HTML5 的更新</h2><p>上一代 HTML4.01 已经过去很久了，HTML5 更新了非常多的东西，整体的发展方向一个是语义化、一个是支持更多的多媒体类型。</p>
+<p>语义化方面比如 <code>header</code>、<code>footer</code>、<code>nav</code>、<code>time</code>等。多媒体方面通过 <code>video</code>、<code>audio</code> 对视频、音频进行设置。</p>
+<p>以下的 HTML 4.01 元素在 HTML5 中已经被删除:</p>
+<ul>
+<li><del>&lt;acronym&gt;</del></li>
+<li><del>&lt;applet&gt;</del></li>
+<li><del>&lt;basefont&gt;</del></li>
+<li><del>&lt;big&gt;</del></li>
+<li><del>&lt;center&gt;</del></li>
+<li><del>&lt;dir&gt;</del></li>
+<li><del>&lt;font&gt;</del></li>
+<li><del>&lt;frame&gt;</del></li>
+<li><del>&lt;frameset&gt;</del></li>
+<li><del>&lt;noframes&gt;</del></li>
+<li><del>&lt;strike&gt;</del></li>
+<li><del>&lt;tt&gt;</del></li>
+</ul>
+<h3 id="Canvas（画布）"><a href="#Canvas（画布）" class="headerlink" title="Canvas（画布）"></a>Canvas（画布）</h3><p>HTML5 中的 Canvas 用于图形的绘制。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;myCanvas&quot;</span> <span class="attr">width</span>=<span class="string">&quot;200&quot;</span> <span class="attr">height</span>=<span class="string">&quot;100&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>使用 JavaScript 进行绘制</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.getElementById(<span class="string">&quot;myCanvas&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">&quot;2d&quot;</span>);</span><br><span class="line">ctx.fillStyle = <span class="string">&quot;#FF0000&quot;</span>;</span><br><span class="line">ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">75</span>);</span><br></pre></td></tr></table></figure>
+<p>通过获取 DOM 节点，然后通过 <code>getContext(&quot;2d&quot;)</code> 方法获取到 Canvas 的一个对象，通过坐标进行一个像素的绘画。</p>
+<p><code>getContext()</code> 函数返回一个渲染上下文对象，参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCanvasElement/getContext">https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCanvasElement/getContext</a></p>
+<p>相关的操作可以参考 <a target="_blank" rel="noopener" href="https://www.runoob.com/tags/ref-canvas.html">https://www.runoob.com/tags/ref-canvas.html</a></p>
+<p>更多的案例可以参考 <a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/html5-canvas-intro.html">https://www.runoob.com/w3cnote/html5-canvas-intro.html</a></p>
+<h3 id="SVG（可伸缩矢量图形）"><a href="#SVG（可伸缩矢量图形）" class="headerlink" title="SVG（可伸缩矢量图形）"></a>SVG（可伸缩矢量图形）</h3><p>下表列出了 canvas 与 SVG 之间的一些不同之处。</p>
+<table>
+<thead>
+<tr>
+<th align="left">Canvas</th>
+<th align="left">SVG</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">依赖分辨率<br />使用 JavaScript 绘制<br />不支持事件处理器<br />弱的文本渲染能力<br />能够以 .png 或 .jpg 格式保存结果图像<br />最适合图像密集型的游戏，其中的许多对象会被频繁重绘</td>
+<td align="left">不依赖分辨率<br />使用 XML 进行绘制<br />支持事件处理器<br />最适合带有大型渲染区域的应用程序（比如谷歌地图）<br />复杂度高会减慢渲染速度（任何过度使用 DOM 的应用都不快）<br />不适合游戏应用</td>
+</tr>
+</tbody></table>
+<p>SVG 最大的好处是相比于普通的图形来说在放大后没有锯齿，因为他的图形是由数学去定义的，而不是像素绘画的。</p>
+<p>更多的实例或者教学可以参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/SVG">https://developer.mozilla.org/zh-CN/docs/Web/SVG</a></p>
+<h3 id="MathML"><a href="#MathML" class="headerlink" title="MathML"></a>MathML</h3><p>提供原生的数学公式的编写，参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/MathML">https://developer.mozilla.org/zh-CN/docs/Web/MathML</a></p>
+<h3 id="拖放"><a href="#拖放" class="headerlink" title="拖放"></a>拖放</h3><p>菜鸟的一个实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>菜鸟教程(runoob.com)<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span><br><span class="line"><span class="css">      <span class="selector-id">#div1</span> &#123;</span></span><br><span class="line">        width: 350px;</span><br><span class="line">        height: 70px;</span><br><span class="line">        padding: 10px;</span><br><span class="line"><span class="css">        <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#aaaaaa</span>;</span></span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span> <span class="title">allowDrop</span>(<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line">        ev.preventDefault();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span> <span class="title">drag</span>(<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        ev.dataTransfer.setData(<span class="string">&quot;Text&quot;</span>, ev.target.id);</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span> <span class="title">drop</span>(<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line">        ev.preventDefault();</span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> data = ev.dataTransfer.getData(<span class="string">&quot;Text&quot;</span>);</span></span><br><span class="line"><span class="javascript">        ev.target.appendChild(<span class="built_in">document</span>.getElementById(data));</span></span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>拖动 RUNOOB.COM 图片到矩形框中:<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;div1&quot;</span> <span class="attr">ondrop</span>=<span class="string">&quot;drop(event)&quot;</span> <span class="attr">ondragover</span>=<span class="string">&quot;allowDrop(event)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    &lt;img</span><br><span class="line">      id=&quot;drag1&quot;</span><br><span class="line">      src=&quot;/images/logo.png&quot;</span><br><span class="line">      draggable=&quot;true&quot;</span><br><span class="line">      ondragstart=&quot;drag(event)&quot;</span><br><span class="line">      width=&quot;336&quot;</span><br><span class="line">      height=&quot;69&quot;</span><br><span class="line">    /&gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过这个实例我们可以知道，一个元素是否可拖、是否可放是需要对 HTML 元素进行控制的。</p>
+<ul>
+<li>在拖动目标上触发事件<ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-ondragstart.html">ondragstart</a> - 用户开始拖动元素时触发</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-ondrag.html">ondrag</a> - 元素正在拖动时触发</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-ondragend.html">ondragend</a> - 用户完成元素拖动后触发</li>
+</ul>
+</li>
+<li>释放目标时触发的事件:<ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-ondragenter.html">ondragenter</a> - 当被鼠标拖动的对象进入其容器范围内时触发此事件</li>
+<li>ondragover - 当某被拖动的对象在另一对象容器范围内拖动时触发此事件</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-ondragleave.html">ondragleave</a> - 当被鼠标拖动的对象离开其容器范围内时触发此事件</li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/jsref/event-ondrop.html">ondrop</a> - 在一个拖动过程中，释放鼠标键时触发此事件</li>
+</ul>
+</li>
+</ul>
+<p>最重要的 <code>draggable=&quot;true&quot;</code> 链接和图像默认是可拖动的。所以可以不用设置这个，不过其他的元素就需要进行一个配置了。</p>
+<p>MDN 的文档参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_Drag_and_Drop_API">https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_Drag_and_Drop_API</a></p>
+<h3 id="Geolocation（地理定位）"><a href="#Geolocation（地理定位）" class="headerlink" title="Geolocation（地理定位）"></a>Geolocation（地理定位）</h3><p>参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator/geolocation%E3%80%81">https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator/geolocation、</a> <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Geolocation">https://developer.mozilla.org/zh-CN/docs/Web/API/Geolocation</a></p>
+<p>通过<code>Navigator.geolocation</code> 返回一个 <code>Geolocation</code> 对象，通过 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Geolocation/getCurrentPosition"><code>getCurrentPosition()</code></a> 方法提供成功或者失败的回调函数，获取当前的位置信息。</p>
+<p>成功的时候返回的是一个 <code>Position</code> 对象，参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/GeolocationPosition%E3%80%82">https://developer.mozilla.org/zh-CN/docs/Web/API/GeolocationPosition。</a></p>
+<h3 id="Video"><a href="#Video" class="headerlink" title="Video"></a>Video</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">&quot;320&quot;</span> <span class="attr">height</span>=<span class="string">&quot;240&quot;</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;forrest_gump.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;forrest_gump.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/ogg&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">track</span> <span class="attr">src</span>=<span class="string">&quot;subtitles_en.vtt&quot;</span> <span class="attr">kind</span>=<span class="string">&quot;subtitles&quot;</span> <span class="attr">srclang</span>=<span class="string">&quot;en&quot;</span> <span class="attr">label</span>=<span class="string">&quot;English&quot;</span> /&gt;</span></span><br><span class="line">  &lt;track</span><br><span class="line">    src=&quot;subtitles_no.vtt&quot;</span><br><span class="line">    kind=&quot;subtitles&quot;</span><br><span class="line">    srclang=&quot;no&quot;</span><br><span class="line">    label=&quot;Norwegian&quot;</span><br><span class="line">  /&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&lt;track&gt; 标签为媒体元素（比如 &lt;audio&gt; and &lt;video&gt;）规定外部文本轨道。</p>
+<p>通过 <code>source</code> 标签确定这个视频或者音频的资源位置。多个格式的 <code>source</code> 可以进行一个容错，防止浏览器不支持某一格式。</p>
+<p>视频的<strong>控件</strong>是可以自定义的，如果没有自定义的话会使用 <code>controls</code> 浏览器默认的控件。</p>
+<p>文档可以参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video">https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video</a> 获取更多详细信息。</p>
+<p>更多的属性比如 <code>preload</code> 可以作为一个优化点，针对不同的视频和网站类型进行优化，提高网页运行速度。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement">https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement</a> 是 JavaScript 多媒体对象的文档，视频和音频都是继承这个对象的。</p>
+<p>视频对象 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLVideoElement%EF%BC%8C%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E8%8E%B7%E5%8F%96DOM%E8%8A%82%E7%82%B9%E4%BD%BF%E7%94%A8">https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLVideoElement，可以通过获取DOM节点使用</a> JavaScript 对这个视频对象进行操作或者自定义视频的控件。</p>
+<h3 id="Audio"><a href="#Audio" class="headerlink" title="Audio"></a>Audio</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.ogg&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/ogg&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;horse.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/mpeg&quot;</span> /&gt;</span></span><br><span class="line">  您的浏览器不支持 audio 元素。</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>格式与视频大概相当，通过 <code>audio</code> 标签定义一个音频，通过 <code>source</code> 标签确定资源路径并提供格式容错。</p>
+<p>音频也可以像视频一样通过 JavaScript 进行操作，也是默认使用 <code>controls</code> 使用浏览器的默认控件。</p>
+<p>参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLAudioElement">https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLAudioElement</a></p>
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p><code>Input</code> 是一个表单控件，用于输入某一类型的数据，在 HTML5 中可以设置更多类型的数据</p>
+<ul>
+<li>color</li>
+<li>date</li>
+<li>datetime</li>
+<li>datetime-local（带时区的时间</li>
+<li>email</li>
+<li>month</li>
+<li>number</li>
+<li>range</li>
+<li>search（搜索栏</li>
+<li>tel（电话</li>
+<li>time</li>
+<li>url</li>
+<li>week</li>
+</ul>
+<p>通过这些内置的 <code>Input</code> 类型可以方便很多，如果你觉得不放心可以使用 <code>pattern</code> 属性来对输入进行一个验证，这也是我觉得应该去做的。</p>
+<p>在这些里面比较有意思的是 <code>range</code> 类型的 <code>Input</code>。因为他默认是一个滑动条，这个滑动条需要设置最大和最小值，默认每一跳是 1，通过 <code>step</code> 属性设置每次滑动的间隔。</p>
+<h3 id="表单元素"><a href="#表单元素" class="headerlink" title="表单元素"></a>表单元素</h3><p>HTML5 有以下新的表单元素:</p>
+<ul>
+<li><code>&lt;datalist&gt;</code></li>
+<li><code>&lt;keygen&gt;</code></li>
+<li><code>&lt;output&gt;</code></li>
+</ul>
+<p>比较关键的是 <code>&lt;datalist&gt;</code> ，因为这个元素可以帮助前端实现一些搜索联想的功能，实用性比较高。通过 <code>list</code> 属性绑定。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">list</span>=<span class="string">&quot;browsers&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">datalist</span> <span class="attr">id</span>=<span class="string">&quot;browsers&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Internet Explorer&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Firefox&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Chrome&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Opera&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Safari&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">datalist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>&lt;keygen&gt;</code> 元素他说是提供密钥对来进行用户验证，但是没有实际用过。（w3school 和菜鸟里面的实例代码都是用的 GET 方法，那还加密干嘛？）</p>
+<h4 id="表单属性"><a href="#表单属性" class="headerlink" title="表单属性"></a>表单属性</h4><p>HTML5 的 <code>&lt;form\&gt;</code> 和 <code>&lt;input&gt;</code>标签添加了几个新属性.</p>
+<p><code>&lt;form&gt;</code>新属性：</p>
+<ul>
+<li>autocomplete（类似于浏览器帮你记录的填写记录，在下一次输入的时候提供自动完成功能，<code>password</code> 类型 <code>Input</code> 不能开启该属性。</li>
+<li>novalidate（取消 type 携带的格式验证，可以取消 <code>required</code> 属性</li>
+</ul>
+<p>&lt;input&gt;新属性：</p>
+<ul>
+<li>autocomplete（单独设置与 <code>form</code> 相反的属性（不然单独设置他干嘛</li>
+<li>autofocus</li>
+<li>form（让这个 <code>Input</code> 属于某一 <code>form</code> （通过 ID</li>
+<li>formaction（覆盖 <code>form</code> 中的 action，只能用于 <code>submit</code> 和 <code>image</code></li>
+<li>formenctype（覆盖 <code>form</code> 元素的 enctype 属性，只能用于 <code>submit</code> 和 <code>image</code>，描述了表单提交到服务器的数据编码</li>
+<li>formmethod（覆盖了 <code>form</code> 元素的 method 属性，只能用于 <code>submit</code> 和 <code>image</code></li>
+<li>formnovalidate（覆盖 <code>&lt;form&gt;</code> 元素的 novalidate 属性，只能用于 <code>submit</code></li>
+<li>formtarget（覆盖 <code>&lt;form&gt;</code> 元素的 target 属性，只能用于 <code>submit</code> 和 <code>image</code></li>
+<li>height 与 width（height 和 width 属性只适用于 image 类型的 <code>&lt;input&gt;</code> 标签。</li>
+<li>list（绑定 <code>datalist</code><ul>
+<li>min 与 max（限制包含日期和数字的 Input</li>
+</ul>
+</li>
+<li>multiple（适用于 email、file 类型，email 通过逗号分隔</li>
+<li>pattern (regexp)（利用正则表达式对输入内容进行验证</li>
+<li>placeholder</li>
+<li>required</li>
+<li>step（合法的数字间隔，min-max=1-10, step=3, 合法的就是 1、4、7、10</li>
+</ul>
+<h3 id="更加清晰的语义化标签"><a href="#更加清晰的语义化标签" class="headerlink" title="更加清晰的语义化标签"></a>更加清晰的语义化标签</h3><p>HTML5 提供了新的语义元素来明确一个 Web 页面的不同部分:</p>
+<ul>
+<li><code>&lt;header&gt;</code> （注意是文档头部区域而不是网页头部区域，</li>
+<li><code>&lt;nav&gt;</code> （导航栏</li>
+<li><code>&lt;section&gt;</code> （章节</li>
+<li><code>&lt;article&gt;</code> （独立内容</li>
+<li><code>&lt;aside&gt;</code> （页面主区域以外的内容如侧边栏等</li>
+<li><code>&lt;figcaption&gt;</code> （ <code>figure</code> 的标题</li>
+<li><code>&lt;figure&gt;</code> （独立的流内容应和主内容相关，但是对文档流不产生影响（图像、图表、照片、代码等等）</li>
+<li><code>&lt;footer&gt;</code></li>
+</ul>
+<p><img src="https://www.runoob.com/wp-content/uploads/2013/07/html5-layout.jpg" alt="HTML5 语义元素"></p>
+<h3 id="Web-存储，localStorage-和-sessionStorage"><a href="#Web-存储，localStorage-和-sessionStorage" class="headerlink" title="Web 存储，localStorage 和 sessionStorage"></a>Web 存储，localStorage 和 sessionStorage</h3><p>大型网页的加载优化始终是网页的一个设计关键点，因为需要加载的东西实在太多，用户的身份验证信息也太多，Cookie 过小的容量不能更好的满足需求。而且 Cookie 一直在各种请求中被使用，容易造成信息泄露。</p>
+<p>客户端存储数据的两个对象为：</p>
+<ul>
+<li>localStorage - 用于长久保存整个网站的数据，保存的数据没有过期时间，直到手动去除。</li>
+<li>sessionStorage - 用于临时保存同一窗口(或标签页)的数据，在关闭窗口或标签页之后将会删除这些数据。</li>
+</ul>
+<p>这两个存储对象一般来说是不会被包含在请求中的，而且 localStorage 如果不去清除的话会一直存在，并不能像 Cookie 一样过期。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2019/04/3793073884-56950753e65db_articlex.png" alt="img"></p>
+<p>同源依然是浏览器缓存的关键点，localStorage 只是在同一网站下即可访问到，SessionStorage 需要同一浏览器的同一窗口下才可，并且在浏览器关闭后会被删除。</p>
+<h3 id="Web-SQL"><a href="#Web-SQL" class="headerlink" title="Web SQL"></a>Web SQL</h3><p><a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-web-sql.html">https://www.runoob.com/html/html5-web-sql.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2018/07/indexeddb.html">http://www.ruanyifeng.com/blog/2018/07/indexeddb.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API">https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API</a></p>
+<p>首先，浏览器不一定支持，其次，在浏览器存储大量结构化数据，一般来说 LocalStorage 是可以满足需求了。</p>
+<p>如果一定需要使用，还是用 IndexedDB 吧，主要是浏览器支持比较好一些。</p>
+<h3 id="应用程序缓存"><a href="#应用程序缓存" class="headerlink" title="应用程序缓存"></a>应用程序缓存</h3><p>首先，这个应用程序实际上还是浏览器运行的页面，就像是把网页变成一个类似于 Chrome 插件的东西，可以更好的提供一个离线环境下的浏览。</p>
+<p>应用程序缓存为应用带来三个优势：</p>
+<ol>
+<li>离线浏览 - 用户可在应用离线时使用它们</li>
+<li>速度 - 已缓存资源加载得更快</li>
+<li>减少服务器负载 - 浏览器将只从服务器下载更新过或更改过的资源。</li>
+</ol>
+<p>如需启用应用程序缓存，请在文档的<html> 标签中包含 manifest 属性：</p>
+<!DOCTYPE HTML>
+<html manifest="demo.appcache">
+...
+</html>
+
+<p>每个指定了 manifest 的页面在用户对其访问时都会被缓存。如果未指定 manifest 属性，则页面不会被缓存（除非在 manifest 文件中直接指定了该页面）。</p>
+<p>manifest 文件的建议的文件扩展名是：”.appcache”。</p>
+<p>请注意，manifest 文件需要配置正确的 MIME-type，即 “text/cache-manifest”。必须在 web 服务器上进行配置。（这里说的是请求时的 header 中的 <strong>accept</strong></p>
+<p>参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Manifest">https://developer.mozilla.org/zh-CN/docs/Web/Manifest</a> <a target="_blank" rel="noopener" href="https://www.runoob.com/html/html5-app-cache.html">https://www.runoob.com/html/html5-app-cache.html</a></p>
+<p><del>两个参考实例的格式并不一样，推荐使用 MDN 的 JSON 格式，</del></p>
+<p>还不清楚这两个实例有啥区别。回头试一下。</p>
+<h3 id="Web-Workers"><a href="#Web-Workers" class="headerlink" title="Web Workers"></a>Web Workers</h3><p>参考 <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2018/07/web-worker.html">http://www.ruanyifeng.com/blog/2018/07/web-worker.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API">https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API</a></p>
+<p>JavaScript 的单线程是由于浏览器限制，但是单线程会导致性能上限比较低，Web Worker 类似于协程，帮助主线程分担压力。操作看资料吧，就是创建对象、运行任务、终止对象。</p>
+<h3 id="服务器发送事件-Server-Sent-Events"><a href="#服务器发送事件-Server-Sent-Events" class="headerlink" title="服务器发送事件(Server-Sent Events)"></a>服务器发送事件(Server-Sent Events)</h3><p>绝大部分网页都是浏览器请求、服务器反馈、网页更新。SSE 用于浏览器自动获取来自服务器的更新。也就是说获得服务器推送。</p>
+<p>参考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Server-sent_events/EventSource">https://developer.mozilla.org/zh-CN/docs/Server-sent_events/EventSource</a></p>
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><p>参考 <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2017/05/websocket.html">http://www.ruanyifeng.com/blog/2017/05/websocket.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket">https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket</a></p>
+<p>同样也是为了实现服务器向客户端推送消息。</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2016/03/ws.png" alt="img"></p>
+<p>使用 WebSockets 或者 SSE 相比于客户端轮询更加节约带宽资源，节省服务器资源。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E5%89%8D%E7%AB%AF/" rel="tag"># 学习前端</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/22/%E5%89%8D%E7%AB%AF%E8%B5%84%E6%BA%90%E4%BB%A5%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%96%87%E7%AB%A0/" rel="prev" title="前端资源以及相关文章整理">
+      <i class="fa fa-chevron-left"></i> 前端资源以及相关文章整理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/22/CSS%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8/" rel="next" title="CSS有什么用？">
+      CSS有什么用？ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML-%E6%95%B4%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">HTML 整理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-DOM"><span class="nav-number">1.1.</span> <span class="nav-text">HTML DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-DOM"><span class="nav-number">1.1.1.</span> <span class="nav-text">CSS DOM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5-%E7%9A%84%E6%9B%B4%E6%96%B0"><span class="nav-number">1.2.</span> <span class="nav-text">HTML5 的更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas%EF%BC%88%E7%94%BB%E5%B8%83%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">Canvas（画布）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVG%EF%BC%88%E5%8F%AF%E4%BC%B8%E7%BC%A9%E7%9F%A2%E9%87%8F%E5%9B%BE%E5%BD%A2%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">SVG（可伸缩矢量图形）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MathML"><span class="nav-number">1.2.3.</span> <span class="nav-text">MathML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%96%E6%94%BE"><span class="nav-number">1.2.4.</span> <span class="nav-text">拖放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geolocation%EF%BC%88%E5%9C%B0%E7%90%86%E5%AE%9A%E4%BD%8D%EF%BC%89"><span class="nav-number">1.2.5.</span> <span class="nav-text">Geolocation（地理定位）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Video"><span class="nav-number">1.2.6.</span> <span class="nav-text">Video</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Audio"><span class="nav-number">1.2.7.</span> <span class="nav-text">Audio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Input"><span class="nav-number">1.2.8.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%85%83%E7%B4%A0"><span class="nav-number">1.2.9.</span> <span class="nav-text">表单元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">表单属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%8A%A0%E6%B8%85%E6%99%B0%E7%9A%84%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE"><span class="nav-number">1.2.10.</span> <span class="nav-text">更加清晰的语义化标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-%E5%AD%98%E5%82%A8%EF%BC%8ClocalStorage-%E5%92%8C-sessionStorage"><span class="nav-number">1.2.11.</span> <span class="nav-text">Web 存储，localStorage 和 sessionStorage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-SQL"><span class="nav-number">1.2.12.</span> <span class="nav-text">Web SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.13.</span> <span class="nav-text">应用程序缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-Workers"><span class="nav-number">1.2.14.</span> <span class="nav-text">Web Workers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%91%E9%80%81%E4%BA%8B%E4%BB%B6-Server-Sent-Events"><span class="nav-number">1.2.15.</span> <span class="nav-text">服务器发送事件(Server-Sent Events)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket"><span class="nav-number">1.2.16.</span> <span class="nav-text">WebSocket</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Pisho"
+      src="/images/icon.jpg">
+  <p class="site-author-name" itemprop="name">Pisho</p>
+  <div class="site-description" itemprop="description">本站看运气访问进来,主要是本人的一些学习笔记,一般没有什么干货。不过还是希望能够帮助你学习到什么。由于域名到期，所以换成了 MOE 二次元域名。😄</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/PishoLu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;PishoLu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:luhongyu.hi@qq.com" title="E-Mail → mailto:luhongyu.hi@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://pisho.me/images/wechatfriend.png" title="Wechat → https:&#x2F;&#x2F;pisho.me&#x2F;images&#x2F;wechatfriend.png" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://steamcommunity.com/profiles/76561198212983353/" title="Steam → https:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198212983353&#x2F;" rel="noopener" target="_blank"><i class="fab fa-steam fa-fw"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pisho</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

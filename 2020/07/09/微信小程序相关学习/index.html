@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.jpg">
+  <link rel="mask-icon" href="/images/icon.jpg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.pisho.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="小程序其实相当于是微信的一个前端框架和组件库，自己整了一套 WXML&#x2F;WXS 语法。应该是可以触类旁通的学的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序相关学习">
+<meta property="og:url" content="http://www.pisho.me/2020/07/09/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Pisho&#39;Blogs">
+<meta property="og:description" content="小程序其实相当于是微信的一个前端框架和组件库，自己整了一套 WXML&#x2F;WXS 语法。应该是可以触类旁通的学的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://res.wx.qq.com/wxdoc/dist/assets/img/page-lifecycle.2e646c86.png">
+<meta property="article:published_time" content="2020-07-09T06:57:29.000Z">
+<meta property="article:modified_time" content="2020-12-23T14:40:51.826Z">
+<meta property="article:author" content="Pisho">
+<meta property="article:tag" content="学习前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://res.wx.qq.com/wxdoc/dist/assets/img/page-lifecycle.2e646c86.png">
+
+<link rel="canonical" href="http://www.pisho.me/2020/07/09/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>微信小程序相关学习 | Pisho'Blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Pisho'Blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Daily Notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.pisho.me/2020/07/09/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon.jpg">
+      <meta itemprop="name" content="Pisho">
+      <meta itemprop="description" content="本站看运气访问进来,主要是本人的一些学习笔记,一般没有什么干货。不过还是希望能够帮助你学习到什么。由于域名到期，所以换成了 MOE 二次元域名。😄">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pisho'Blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          微信小程序相关学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-09 14:57:29" itemprop="dateCreated datePublished" datetime="2020-07-09T14:57:29+08:00">2020-07-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-23 22:40:51" itemprop="dateModified" datetime="2020-12-23T22:40:51+08:00">2020-12-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">小程序其实相当于是微信的一个前端框架和组件库，自己整了一套 WXML/WXS 语法。应该是可以触类旁通的学的。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="WXML"><a href="#WXML" class="headerlink" title="WXML"></a>WXML</h1><p>感觉在玩谐音梗，但是 WXML 感觉和 XML 语法没太大关系，文档中主要介绍了在 HTML 中使用数据的方法。感觉在格式上和 Vue 框架比较像一些吧。</p>
+<blockquote>
+<p>WXML（WeiXin Markup Language）是框架设计的一套标签语言，结合<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/index.html">基础组件</a>、<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html">事件系统</a>，可以构建出页面的结构。</p>
+</blockquote>
+<h2 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h2><p>首先，微信的这个框架默认是一个多页面应用 MPA，相比于 Vue 的 SPA，最主要的区别在于 MPA 会在编译时根据页面生成多个页面，页面与页面之间就像组件与组件一样没什么关系，SPA 会生成一个主页，通过 Vue-router 进行组件间的跳转、切换。</p>
+<p>在微信框架中，数据保存在 Page 对象中的 data 中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    message: <span class="string">&quot;Hello MINA!&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在模板中可以通过 `{{}}`进行简单的数据绑定
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span> &#123;&#123; message &#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+如果是动态绑定属性的话也需要使用`{{}}`</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">id</span>=<span class="string">&quot;item-&#123;&#123;id&#125;&#125;&quot;</span>&gt;</span> <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果有必要的话可以在`{{}}`中使用一些简单的计算，如三元、算数、逻辑字符串等。</p>
+<p><strong>注意：</strong> 花括号和引号之间如果有空格，将最终被解析成为字符串</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;[1,2,3]&#125;&#125; &quot;</span>&gt;</span> &#123;&#123;item&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>等同于</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;[1,2,3] + &#x27; &#x27;&#125;&#125;&quot;</span>&gt;</span> &#123;&#123;item&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h2><h3 id="wx-for"><a href="#wx-for" class="headerlink" title="wx:for"></a>wx:for</h3><p>在组件上使用 <code>wx:for</code> 控制属性绑定一个数组，即可使用数组中各项的数据重复渲染该组件。</p>
+<p>默认数组的当前项的下标变量名默认为 <code>index</code>，数组当前项的变量名默认为 <code>item</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;array&#125;&#125;&quot;</span>&gt;</span> &#123;&#123;index&#125;&#125;: &#123;&#123;item.message&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    array: [</span><br><span class="line">      &#123;</span><br><span class="line">        message: <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        message: <span class="string">&quot;bar&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>使用 <code>wx:for-item</code> 可以指定数组当前元素的变量名，</p>
+<p>使用 <code>wx:for-index</code> 可以指定数组当前下标的变量名：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;array&#125;&#125;&quot;</span> <span class="attr">wx:for-index</span>=<span class="string">&quot;idx&quot;</span> <span class="attr">wx:for-item</span>=<span class="string">&quot;itemName&quot;</span>&gt;</span></span><br><span class="line">  &#123;&#123;idx&#125;&#125;: &#123;&#123;itemName.message&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果不指定的话就是默认的 index/item。</p>
+<p><code>wx:for</code> 也可以嵌套，下边是一个九九乘法表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;[1, 2, 3, 4, 5, 6, 7, 8, 9]&#125;&#125;&quot;</span> <span class="attr">wx:for-item</span>=<span class="string">&quot;i&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;[1, 2, 3, 4, 5, 6, 7, 8, 9]&#125;&#125;&quot;</span> <span class="attr">wx:for-item</span>=<span class="string">&quot;j&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;i &lt;= j&#125;&#125;&quot;</span>&gt;</span> &#123;&#123;i&#125;&#125; * &#123;&#123;j&#125;&#125; = &#123;&#123;i * j&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="block-wx-for"><a href="#block-wx-for" class="headerlink" title="block wx:for"></a>block wx:for</h4><p>类似 <code>block wx:if</code>，也可以将 <code>wx:for</code> 用在<code>&lt;block/&gt;</code>标签上，以渲染一个包含多节点的结构块。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;[1, 2, 3]&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span> &#123;&#123;index&#125;&#125;: <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span> &#123;&#123;item&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这文档够乱的，这里的 <code>&lt;view&gt;</code> 和 <code>&lt;block&gt;</code> 标签可以理解为 <code>div</code> 的一种变体，是微信自己定义的。</p>
+<h4 id="wx-key"><a href="#wx-key" class="headerlink" title="wx:key"></a>wx:key</h4><p>如果列表中项目的位置会动态改变或者有新的项目添加到列表中，并且希望列表中的项目保持自己的特征和状态（如 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/input.html">input</a> 中的输入内容，<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/switch.html">switch</a> 的选中状态），需要使用 <code>wx:key</code> 来指定列表中项目的唯一的标识符。</p>
+<p><code>wx:key</code> 的值以两种形式提供</p>
+<ol>
+<li>字符串，代表在 for 循环的 array 中 item 的某个 property，该 property 的值需要是列表中唯一的字符串或数字，且不能动态改变。</li>
+<li>保留关键字 <code>*this</code> 代表在 for 循环中的 item 本身，这种表示需要 item 本身是一个唯一的字符串或者数字。</li>
+</ol>
+<p>当数据改变触发渲染层重新渲染的时候，会校正带有 key 的组件，框架会确保他们被重新排序，而不是重新创建，以确保使组件保持自身的状态，并且提高列表渲染时的效率。</p>
+<p><strong>如不提供 <code>wx:key</code>，会报一个 <code>warning</code>， 如果明确知道该列表是静态，或者不必关注其顺序，可以选择忽略。</strong></p>
+<p>这里的 <code>key</code> 和 <code>v-for</code> 中的 <code>key</code> 是一个意思。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">switch</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;objectArray&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;unique&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display: block;&quot;</span>&gt;</span></span><br><span class="line">  &#123;&#123;item.id&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">switch</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">bindtap</span>=<span class="string">&quot;switch&quot;</span>&gt;</span>Switch<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">bindtap</span>=<span class="string">&quot;addToFront&quot;</span>&gt;</span>Add to the front<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">switch</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;numberArray&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;*this&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display: block;&quot;</span>&gt;</span></span><br><span class="line">  &#123;&#123;item&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">switch</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">bindtap</span>=<span class="string">&quot;addNumberToFront&quot;</span>&gt;</span>Add to the front<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    objectArray: [</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">5</span>, <span class="attr">unique</span>: <span class="string">&quot;unique_5&quot;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">4</span>, <span class="attr">unique</span>: <span class="string">&quot;unique_4&quot;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">3</span>, <span class="attr">unique</span>: <span class="string">&quot;unique_3&quot;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">unique</span>: <span class="string">&quot;unique_2&quot;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">unique</span>: <span class="string">&quot;unique_1&quot;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">0</span>, <span class="attr">unique</span>: <span class="string">&quot;unique_0&quot;</span> &#125;,</span><br><span class="line">    ],</span><br><span class="line">    numberArray: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">switch</span>: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> length = <span class="built_in">this</span>.data.objectArray.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; ++i) &#123;</span><br><span class="line">      <span class="keyword">const</span> x = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * length);</span><br><span class="line">      <span class="keyword">const</span> y = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * length);</span><br><span class="line">      <span class="keyword">const</span> temp = <span class="built_in">this</span>.data.objectArray[x];</span><br><span class="line">      <span class="built_in">this</span>.data.objectArray[x] = <span class="built_in">this</span>.data.objectArray[y];</span><br><span class="line">      <span class="built_in">this</span>.data.objectArray[y] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">      objectArray: <span class="built_in">this</span>.data.objectArray,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">  addToFront: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> length = <span class="built_in">this</span>.data.objectArray.length;</span><br><span class="line">    <span class="built_in">this</span>.data.objectArray = [&#123; <span class="attr">id</span>: length, <span class="attr">unique</span>: <span class="string">&quot;unique_&quot;</span> + length &#125;].concat(</span><br><span class="line">      <span class="built_in">this</span>.data.objectArray</span><br><span class="line">    );</span><br><span class="line">    <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">      objectArray: <span class="built_in">this</span>.data.objectArray,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">  addNumberToFront: <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.data.numberArray = [<span class="built_in">this</span>.data.numberArray.length + <span class="number">1</span>].concat(</span><br><span class="line">      <span class="built_in">this</span>.data.numberArray</span><br><span class="line">    );</span><br><span class="line">    <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">      numberArray: <span class="built_in">this</span>.data.numberArray,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h2><h3 id="wx-if"><a href="#wx-if" class="headerlink" title="wx:if"></a>wx:if</h3><p>在框架中，使用 <code>wx:if=&quot;&quot;</code> 来判断是否需要渲染该代码块：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;condition&#125;&#125;&quot;</span>&gt;</span> True <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>也可以用 <code>wx:elif</code> 和 <code>wx:else</code> 来添加一个 else 块：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;length &gt; 5&#125;&#125;&quot;</span>&gt;</span> 1 <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:elif</span>=<span class="string">&quot;&#123;&#123;length &gt; 2&#125;&#125;&quot;</span>&gt;</span> 2 <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:else</span>&gt;</span> 3 <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="block-wx-if"><a href="#block-wx-if" class="headerlink" title="block wx:if"></a>block wx:if</h3><p>因为 <code>wx:if</code> 是一个控制属性，需要将它添加到一个标签上。如果要一次性判断多个组件标签，可以使用一个 <code>&lt;block/&gt;</code> 标签将多个组件包装起来，并在上边使用 <code>wx:if</code> 控制属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;true&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span> view1 <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span> view2 <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：</strong> <code>&lt;block/&gt;</code> 并不是一个组件，它仅仅是一个包装元素，不会在页面中做任何渲染，只接受控制属性。这种事情要早说啊。</p>
+</blockquote>
+<h4 id="wx-if-vs-hidden"><a href="#wx-if-vs-hidden" class="headerlink" title="wx:if vs hidden"></a><code>wx:if</code> vs <code>hidden</code></h4><p>因为 <code>wx:if</code> 之中的模板也可能包含数据绑定，所以当 <code>wx:if</code> 的条件值切换时，框架有一个局部渲染的过程，因为它会确保条件块在切换时销毁或重新渲染。</p>
+<p>同时 <code>wx:if</code> 也是<strong>惰性的</strong>，如果在初始渲染条件为 <code>false</code>，框架什么也不做，在条件第一次变成真的时候才开始局部渲染。</p>
+<p>相比之下，<code>hidden</code> 就简单的多，组件始终会被渲染，只是简单的控制显示与隐藏。</p>
+<p>一般来说，<code>wx:if</code> 有更高的切换消耗而 <code>hidden</code> 有更高的初始渲染消耗。因此，如果需要频繁切换的情景下，用 <code>hidden</code> 更好，如果在运行时条件不大可能改变则 <code>wx:if</code> 较好。</p>
+<p>和 <code>v-show</code> 以及 <code>v-if</code> 是一个意思。</p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><blockquote>
+<p>WXML 提供模板（template），可以在模板中定义代码片段，然后在不同的地方调用。</p>
+</blockquote>
+<p>在 WXML 中，模板是一个可复用的东西，也可以说成是组件吧。</p>
+<h3 id="定义模板"><a href="#定义模板" class="headerlink" title="定义模板"></a>定义模板</h3><p>使用 name 属性，作为模板的名字。然后在<code>&lt;template/&gt;</code>内定义代码片段，如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">  index: int</span></span><br><span class="line"><span class="comment">  msg: string</span></span><br><span class="line"><span class="comment">  time: string</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">name</span>=<span class="string">&quot;msgItem&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">text</span>&gt;</span> &#123;&#123;index&#125;&#125;: &#123;&#123;msg&#125;&#125; <span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">text</span>&gt;</span> Time: &#123;&#123;time&#125;&#125; <span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用模板"><a href="#使用模板" class="headerlink" title="使用模板"></a>使用模板</h3><p>使用 is 属性，声明需要的使用的模板，然后将模板所需要的 data 传入，如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">is</span>=<span class="string">&quot;msgItem&quot;</span> <span class="attr">data</span>=<span class="string">&quot;&#123;&#123;...item&#125;&#125;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    item: &#123;</span><br><span class="line">      index: <span class="number">0</span>,</span><br><span class="line">      msg: <span class="string">&quot;this is a template&quot;</span>,</span><br><span class="line">      time: <span class="string">&quot;2016-09-15&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">name</span>=<span class="string">&quot;odd&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span> odd <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">name</span>=<span class="string">&quot;even&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span> even <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;[1, 2, 3, 4, 5]&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">is</span>=<span class="string">&quot;&#123;&#123;item % 2 == 0 ? &#x27;even&#x27; : &#x27;odd&#x27;&#125;&#125;&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或者是使用 <code>is</code> 关键字搭配三元运算符，进行动态的切换模板。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>WXML 提供两种文件引用方式<code>import</code>和<code>include</code>。</p>
+<h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><p><code>import</code>可以在该文件中使用目标文件定义的<code>template</code>，如：</p>
+<p>在 item.wxml 中定义了一个叫<code>item</code>的<code>template</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- item.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">name</span>=<span class="string">&quot;item&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span>&gt;</span>&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在 index.wxml 中引用了 item.wxml，就可以使用<code>item</code>模板：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">import</span> <span class="attr">src</span>=<span class="string">&quot;item.wxml&quot;</span> /&gt;</span> <span class="tag">&lt;<span class="name">template</span> <span class="attr">is</span>=<span class="string">&quot;item&quot;</span> <span class="attr">data</span>=<span class="string">&quot;&#123;&#123;text: &#x27;forbar&#x27;&#125;&#125;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="import-的作用域"><a href="#import-的作用域" class="headerlink" title="import 的作用域"></a>import 的作用域</h3><p>import 有作用域的概念，即只会 import 目标文件中定义的 template，而不会 import 目标文件 import 的 template。</p>
+<p>**如：C import B，B import A，在 C 中可以使用 B 定义的<code>template</code>，在 B 中可以使用 A 定义的<code>template</code>，但是 C 不能使用 A 定义的<code>template</code>**。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- A.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">name</span>=<span class="string">&quot;A&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span>&gt;</span> A template <span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- B.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">import</span> <span class="attr">src</span>=<span class="string">&quot;a.wxml&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">name</span>=<span class="string">&quot;B&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span>&gt;</span> B template <span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- C.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">import</span> <span class="attr">src</span>=<span class="string">&quot;b.wxml&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">is</span>=<span class="string">&quot;A&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Error! Can not use tempalte when not import A. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">is</span>=<span class="string">&quot;B&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="include"><a href="#include" class="headerlink" title="include"></a>include</h3><p><code>include</code> 可以将目标文件<strong>除了</strong> <code>&lt;template/&gt;</code> <code>&lt;wxs/&gt;</code> 外的整个代码引入，相当于是拷贝到 <code>include</code> 位置，如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">src</span>=<span class="string">&quot;header.wxml&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span> body <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">src</span>=<span class="string">&quot;footer.wxml&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- header.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span> header <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- footer.wxml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span> footer <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>相比于 include 来说，<code>import</code> 的行为更加的严谨。</p>
+<h2 id="有关-XML-的事情"><a href="#有关-XML-的事情" class="headerlink" title="有关 XML 的事情"></a>有关 XML 的事情</h2><p>目前来看，WXML 还是有关于 XML 的东西的，比如在小程序的默认模板中。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.wxml--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;userinfo&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;!hasUserInfo &amp;&amp; canIUse&#125;&#125;&quot;</span> <span class="attr">open-type</span>=<span class="string">&quot;getUserInfo&quot;</span> <span class="attr">bindgetuserinfo</span>=<span class="string">&quot;getUserInfo&quot;</span>&gt;</span> 获取头像昵称 <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:else</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">image</span> <span class="attr">bindtap</span>=<span class="string">&quot;bindViewTap&quot;</span> <span class="attr">class</span>=<span class="string">&quot;userinfo-avatar&quot;</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;userInfo.avatarUrl&#125;&#125;&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;cover&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">&quot;userinfo-nickname&quot;</span>&gt;</span>&#123;&#123;userInfo.nickName&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;usermotto&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">&quot;user-motto&quot;</span>&gt;</span>&#123;&#123;motto&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>首先 <code>view</code> 是最常见的一个标签，用来表示展示，<code>block</code> 标签用来表示控制属性，仅仅只是一个包装元素。这些标签，以及其他的内容标签比如上面的 <code>image</code> 和 <code>text</code> 都是微信的组件。组件库参考 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/">https://developers.weixin.qq.com/miniprogram/dev/component/</a></p>
+<p>所以基本上，微信吧所有的 HTML5 标签重写封装了一遍。</p>
+<h1 id="WXS"><a href="#WXS" class="headerlink" title="WXS"></a>WXS</h1><blockquote>
+<p>WXS（WeiXin Script）是小程序的一套脚本语言，结合 <code>WXML</code>，可以构建出页面的结构。</p>
+<p>WXS 与 JavaScript 是不同的语言，有自己的语法，并不和 JavaScript 一致。</p>
+</blockquote>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>WXS 代码可以编写在 wxml 文件中的 <code>&lt;wxs&gt;</code> 标签内，或以 <code>.wxs</code> 为后缀名的文件内。和 <code>&lt;script&gt;</code> 一样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /pages/tools.wxs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = <span class="string">&quot;&#x27;hello world&#x27; from tools.wxs&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> bar = <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> d;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  FOO: foo,</span><br><span class="line">  bar: bar,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">module</span>.exports.msg = <span class="string">&quot;some msg&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>使用 module.exports 将模块内容导出。在其他文件中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- page/index/index.wxml --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">wxs</span> <span class="attr">src</span>=<span class="string">&quot;./../tools.wxs&quot;</span> <span class="attr">module</span>=<span class="string">&quot;tools&quot;</span> /&gt;</span></span><br><span class="line">// var tools = require(&quot;./tools.wxs&quot;);</span><br><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span> &#123;&#123;tools.msg&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span> &#123;&#123;tools.bar(tools.FOO)&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过 <code>&lt;wxs&gt;</code> 标签或者 <code>require()</code> 函数引入。</p>
+<h3 id="require-函数"><a href="#require-函数" class="headerlink" title="require 函数"></a>require 函数</h3><p>在<code>.wxs</code>模块中引用其他 <code>wxs</code> 文件模块，可以使用 <code>require</code> 函数。</p>
+<p>引用的时候，要注意如下几点：</p>
+<ul>
+<li>只能引用 <code>.wxs</code> 文件模块，且必须使用相对路径。</li>
+<li><code>wxs</code> 模块均为<strong>单例</strong>，<code>wxs</code> 模块在第一次被引用时，会自动初始化为单例对象。多个页面，多个地方，多次引用，使用的都是同一个 <code>wxs</code> 模块对象。</li>
+<li>如果一个 <code>wxs</code> 模块在定义之后，一直没有被引用，则该模块不会被解析与运行。</li>
+</ul>
+<p>模块单例化，也就是说如果多个页面引入的话，数据是共享的，并且一边更改后也会同步吧。</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>WXS 中的变量均为值的引用。</li>
+<li>没有声明的变量直接赋值使用，会被定义为全局变量。</li>
+<li>如果只声明变量而不赋值，则默认值为 <code>undefined</code>。</li>
+<li>var 表现与 javascript 一致，会有变量提升。</li>
+</ul>
+<p>也就是说默认是一个浅拷贝，而且使用没有声明的变量并不会报错，而是定义为全局变量处理。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>WXS 语言目前共有以下几种数据类型：</p>
+<ul>
+<li><code>number</code> ： 数值</li>
+<li><code>string</code> ：字符串</li>
+<li><code>boolean</code>：布尔值</li>
+<li><code>object</code>：对象</li>
+<li><code>function</code>：函数</li>
+<li><code>array</code> : 数组</li>
+<li><code>date</code>：日期</li>
+<li><code>regexp</code>：正则</li>
+</ul>
+<p>基本与 JS 一致</p>
+<h1 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h1><h2 id="页面生命周期"><a href="#页面生命周期" class="headerlink" title="页面生命周期"></a>页面生命周期</h2><p><img src="https://res.wx.qq.com/wxdoc/dist/assets/img/page-lifecycle.2e646c86.png" alt="微信生命周期"></p>
+<table>
+<thead>
+<tr>
+<th><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onLoad-Object-query">onLoad</a></th>
+<th>生命周期回调—监听页面加载</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onShow">onShow</a></td>
+<td>生命周期回调—监听页面显示</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onReady">onReady</a></td>
+<td>生命周期回调—监听页面初次渲染完成</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onHide">onHide</a></td>
+<td>生命周期回调—监听页面隐藏</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onUnload">onUnload</a></td>
+<td>生命周期回调—监听页面卸载</td>
+</tr>
+</tbody></table>
+<h2 id="页面监听函数"><a href="#页面监听函数" class="headerlink" title="页面监听函数"></a>页面监听函数</h2><table>
+<thead>
+<tr>
+<th><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onPullDownRefresh">onPullDownRefresh</a></th>
+<th>监听用户下拉动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onReachBottom">onReachBottom</a></td>
+<td>页面上拉触底事件的处理函数</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onShareAppMessage-Object-object">onShareAppMessage</a></td>
+<td>用户点击右上角转发</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onShareTimeline">onShareTimeline</a></td>
+<td>用户点击右上角转发到朋友圈</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onAddToFavorites-Object-object">onAddToFavorites</a></td>
+<td>用户点击右上角收藏</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onPageScroll-Object-object">onPageScroll</a></td>
+<td>页面滚动触发事件的处理函数</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onResize-Object-object">onResize</a></td>
+<td>页面尺寸改变时触发，详见 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/resizable.html#%E5%9C%A8%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%90%AF%E7%94%A8%E5%B1%8F%E5%B9%95%E6%97%8B%E8%BD%AC%E6%94%AF%E6%8C%81">响应显示区域变化</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onTabItemTap-Object-object">onTabItemTap</a></td>
+<td>当前是 tab 页时，点击 tab 时触发</td>
+</tr>
+</tbody></table>
+<h2 id="在页面中使用-behaviors"><a href="#在页面中使用-behaviors" class="headerlink" title="在页面中使用 behaviors"></a>在页面中使用 behaviors</h2><blockquote>
+<p>基础库 2.9.2 开始支持，低版本需做<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">兼容处理</a>。</p>
+</blockquote>
+<blockquote>
+<p>页面可以引用 behaviors 。 behaviors 可以用来让多个页面有相同的数据字段和方法。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// my-behavior.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = Behavior(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    sharedText: <span class="string">&quot;This is a piece of data shared between pages.&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    sharedMethod: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">this</span>.data.sharedText === <span class="string">&quot;This is a piece of data shared between pages.&quot;</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// page-a.js</span></span><br><span class="line"><span class="keyword">var</span> myBehavior = <span class="built_in">require</span>(<span class="string">&quot;./my-behavior.js&quot;</span>);</span><br><span class="line">Page(&#123;</span><br><span class="line">  behaviors: [myBehavior],</span><br><span class="line">  onLoad: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.data.sharedText === <span class="string">&quot;This is a piece of data shared between pages.&quot;</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>效果类似于 Store，State 等，主要目的是为了组件（页面）间共享数据及方法。</p>
+<p>在微信小程序中，由于它的多页面特性，一般是一个页面为一个单位的，但是当页面复杂起来后，组件化的思想依然很有必要。将部分可复用、重复性的代码提取成组件进行使用。通过 Component 进行组件注册。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    text: <span class="string">&quot;This is page data.&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    onLoad: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 页面创建时执行</span></span><br><span class="line">    &#125;,</span><br><span class="line">    onPullDownRefresh: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 下拉刷新时执行</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 事件响应函数</span></span><br><span class="line">    viewTap: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>与 <code>Page()</code> 明显不同的是方法放在 <code>methods</code> 中，在组件中也可以自由使用 <code>behaviors</code> 等属性。</p>
+<h2 id="页面路由"><a href="#页面路由" class="headerlink" title="页面路由"></a>页面路由</h2><h3 id="页面栈"><a href="#页面栈" class="headerlink" title="页面栈"></a>页面栈</h3><p>框架以栈的形式维护了当前的所有页面。 当发生路由切换的时候，页面栈的表现如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">路由方式</th>
+<th align="left">页面栈表现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">初始化</td>
+<td align="left">新页面入栈</td>
+</tr>
+<tr>
+<td align="left">打开新页面</td>
+<td align="left">新页面入栈</td>
+</tr>
+<tr>
+<td align="left">页面重定向</td>
+<td align="left">当前页面出栈，新页面入栈</td>
+</tr>
+<tr>
+<td align="left">页面返回</td>
+<td align="left">页面不断出栈，直到目标返回页</td>
+</tr>
+<tr>
+<td align="left">Tab 切换</td>
+<td align="left">页面全部出栈，只留下新的 Tab 页面</td>
+</tr>
+<tr>
+<td align="left">重加载</td>
+<td align="left">页面全部出栈，只留下新的页面</td>
+</tr>
+</tbody></table>
+<p>开发者可以使用 <code>getCurrentPages()</code> 函数获取当前页面栈。</p>
+<h3 id="路由方式"><a href="#路由方式" class="headerlink" title="路由方式"></a>路由方式</h3><p>对于路由的触发方式以及页面生命周期函数如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">路由方式</th>
+<th align="left">触发时机</th>
+<th align="left">路由前页面</th>
+<th align="left">路由后页面</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">初始化</td>
+<td align="left">小程序打开的第一个页面</td>
+<td align="left"></td>
+<td align="left">onLoad, onShow</td>
+</tr>
+<tr>
+<td align="left">打开新页面</td>
+<td align="left">调用 API <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.navigateTo.html">wx.navigateTo</a> 使用组件 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html"><code>&lt;navigator open-type=&quot;navigateTo&quot;/&gt;</code></a></td>
+<td align="left">onHide</td>
+<td align="left">onLoad, onShow</td>
+</tr>
+<tr>
+<td align="left">页面重定向</td>
+<td align="left">调用 API <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.redirectTo.html">wx.redirectTo</a> 使用组件 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html"><code>&lt;navigator open-type=&quot;redirectTo&quot;/&gt;</code></a></td>
+<td align="left">onUnload</td>
+<td align="left">onLoad, onShow</td>
+</tr>
+<tr>
+<td align="left">页面返回</td>
+<td align="left">调用 API <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.navigateBack.html">wx.navigateBack</a> 使用组件<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html"><code>&lt;navigator open-type=&quot;navigateBack&quot;&gt;</code></a> 用户按左上角返回按钮</td>
+<td align="left">onUnload</td>
+<td align="left">onShow</td>
+</tr>
+<tr>
+<td align="left">Tab 切换</td>
+<td align="left">调用 API <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.switchTab.html">wx.switchTab</a> 使用组件 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html"><code>&lt;navigator open-type=&quot;switchTab&quot;/&gt;</code></a> 用户切换 Tab</td>
+<td align="left"></td>
+<td align="left">各种情况请参考下表</td>
+</tr>
+<tr>
+<td align="left">重启动</td>
+<td align="left">调用 API <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.reLaunch.html">wx.reLaunch</a> 使用组件 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html"><code>&lt;navigator open-type=&quot;reLaunch&quot;/&gt;</code></a></td>
+<td align="left">onUnload</td>
+<td align="left">onLoad, onShow</td>
+</tr>
+</tbody></table>
+<p>Tab 切换对应的生命周期（以 A、B 页面为 Tabbar 页面，C 是从 A 页面打开的页面，D 页面是从 C 页面打开的页面为例）：</p>
+<table>
+<thead>
+<tr>
+<th align="left">当前页面</th>
+<th align="left">路由后页面</th>
+<th align="left">触发的生命周期（按顺序）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">A</td>
+<td align="left">A</td>
+<td align="left">Nothing happend</td>
+</tr>
+<tr>
+<td align="left">A</td>
+<td align="left">B</td>
+<td align="left">A.onHide(), B.onLoad(), B.onShow()</td>
+</tr>
+<tr>
+<td align="left">A</td>
+<td align="left">B（再次打开）</td>
+<td align="left">A.onHide(), B.onShow()</td>
+</tr>
+<tr>
+<td align="left">C</td>
+<td align="left">A</td>
+<td align="left">C.onUnload(), A.onShow()</td>
+</tr>
+<tr>
+<td align="left">C</td>
+<td align="left">B</td>
+<td align="left">C.onUnload(), B.onLoad(), B.onShow()</td>
+</tr>
+<tr>
+<td align="left">D</td>
+<td align="left">B</td>
+<td align="left">D.onUnload(), C.onUnload(), B.onLoad(), B.onShow()</td>
+</tr>
+<tr>
+<td align="left">D（从转发进入）</td>
+<td align="left">A</td>
+<td align="left">D.onUnload(), A.onLoad(), A.onShow()</td>
+</tr>
+<tr>
+<td align="left">D（从转发进入）</td>
+<td align="left">B</td>
+<td align="left">D.onUnload(), B.onLoad(), B.onShow()</td>
+</tr>
+</tbody></table>
+<p>简单来说，由于 C 是从 A 页面打开的页面，所以 C 算是 A 的子页面，返回 A 时不再进行 <code>A.onLoad()</code> ，如果是 D 页面转到 B 页面，会关闭 D C，但是不会追溯到 A 页面。</p>
+<p><strong>Tips</strong>:</p>
+<ul>
+<li><code>navigateTo</code>, <code>redirectTo</code> 只能打开非 tabBar 页面。</li>
+<li><code>switchTab</code> 只能打开 tabBar 页面。</li>
+<li><code>reLaunch</code> 可以打开任意页面。</li>
+<li>页面底部的 tabBar 由页面决定，即只要是定义为 tabBar 的页面，底部都有 tabBar。</li>
+<li>调用页面路由带的参数可以在目标页面的<code>onLoad</code>中获取。</li>
+</ul>
+<h2 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h2><p>可以将一些公共的代码抽离成为一个单独的 js 文件，作为一个模块。模块只有通过 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/module.html"><code>module.exports</code></a> 或者 <code>exports</code> 才能对外暴露接口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// common.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Hello <span class="subst">$&#123;name&#125;</span> !`</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayGoodbye</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Goodbye <span class="subst">$&#123;name&#125;</span> !`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports.sayHello = sayHello;</span><br><span class="line"><span class="built_in">exports</span>.sayGoodbye = sayGoodbye;</span><br></pre></td></tr></table></figure>
+<p>在需要使用这些模块的文件中，使用 <code>require</code> 将公共代码引入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> common = <span class="built_in">require</span>(<span class="string">&quot;common.js&quot;</span>);</span><br><span class="line">Page(&#123;</span><br><span class="line">  helloMINA: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    common.sayHello(<span class="string">&quot;MINA&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  goodbyeMINA: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    common.sayGoodbye(<span class="string">&quot;MINA&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h2><h3 id="事件分类"><a href="#事件分类" class="headerlink" title="事件分类"></a>事件分类</h3><p>事件分为冒泡事件和非冒泡事件：</p>
+<ol>
+<li>冒泡事件：当一个组件上的事件被触发后，该事件会向父节点传递。</li>
+<li>非冒泡事件：当一个组件上的事件被触发后，该事件不会向父节点传递。</li>
+</ol>
+<p>WXML 的冒泡事件列表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">触发条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">touchstart</td>
+<td align="left">手指触摸动作开始</td>
+</tr>
+<tr>
+<td align="left">touchmove</td>
+<td align="left">手指触摸后移动</td>
+</tr>
+<tr>
+<td align="left">touchcancel</td>
+<td align="left">手指触摸动作被打断，如来电提醒，弹窗</td>
+</tr>
+<tr>
+<td align="left">touchend</td>
+<td align="left">手指触摸动作结束</td>
+</tr>
+<tr>
+<td align="left">tap</td>
+<td align="left">手指触摸后马上离开</td>
+</tr>
+<tr>
+<td align="left">longpress</td>
+<td align="left">手指触摸后，超过 350ms 再离开，如果指定了事件回调函数并触发了这个事件，tap 事件将不被触发</td>
+</tr>
+<tr>
+<td align="left">longtap</td>
+<td align="left">手指触摸后，超过 350ms 再离开（推荐使用 longpress 事件代替）</td>
+</tr>
+<tr>
+<td align="left">transitionend</td>
+<td align="left">会在 WXSS transition 或 wx.createAnimation 动画结束后触发</td>
+</tr>
+<tr>
+<td align="left">animationstart</td>
+<td align="left">会在一个 WXSS animation 动画开始时触发</td>
+</tr>
+<tr>
+<td align="left">animationiteration</td>
+<td align="left">会在一个 WXSS animation 一次迭代结束时触发</td>
+</tr>
+<tr>
+<td align="left">animationend</td>
+<td align="left">会在一个 WXSS animation 动画完成时触发</td>
+</tr>
+<tr>
+<td align="left">touchforcechange</td>
+<td align="left">在支持 3D Touch 的 iPhone 设备，重按时会触发</td>
+</tr>
+</tbody></table>
+<h3 id="普通事件绑定"><a href="#普通事件绑定" class="headerlink" title="普通事件绑定"></a>普通事件绑定</h3><p>事件绑定的写法类似于组件的属性，如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">bindtap</span>=<span class="string">&quot;handleTap&quot;</span>&gt;</span> Click here! <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果用户点击这个 view ，则页面的 <code>handleTap</code> 会被调用。</p>
+<p>事件绑定函数可以是一个数据绑定，如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">bindtap</span>=<span class="string">&quot;&#123;&#123; handlerName &#125;&#125;&quot;</span>&gt;</span> Click here! <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此时，页面的 <code>this.data.handlerName</code> 必须是一个字符串，指定事件处理函数名；如果它是个空字符串，则这个绑定会失效（可以利用这个特性来暂时禁用一些事件）。</p>
+<p>自基础库版本 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">1.5.0</a> 起，在大多数组件和自定义组件中， <code>bind</code> 后可以紧跟一个冒号，其含义不变，如 <code>bind:tap</code> 。基础库版本 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">2.8.1</a> 起，在所有组件中开始提供这个支持。</p>
+<h3 id="绑定并阻止事件冒泡"><a href="#绑定并阻止事件冒泡" class="headerlink" title="绑定并阻止事件冒泡"></a>绑定并阻止事件冒泡</h3><p>除 <code>bind</code> 外，也可以用 <code>catch</code> 来绑定事件。与 <code>bind</code> 不同， <code>catch</code> 会阻止事件向上冒泡。</p>
+<p>例如在下边这个例子中，点击 inner view 会先后调用<code>handleTap3</code>和<code>handleTap2</code>(因为 tap 事件会冒泡到 middle view，而 middle view 阻止了 tap 事件冒泡，不再向父节点传递)，点击 middle view 会触发<code>handleTap2</code>，点击 outer view 会触发<code>handleTap1</code>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">id</span>=<span class="string">&quot;outer&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;handleTap1&quot;</span>&gt;</span></span><br><span class="line">  outer view</span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">id</span>=<span class="string">&quot;middle&quot;</span> <span class="attr">catchtap</span>=<span class="string">&quot;handleTap2&quot;</span>&gt;</span></span><br><span class="line">    middle view</span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">id</span>=<span class="string">&quot;inner&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;handleTap3&quot;</span>&gt;</span> inner view <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="互斥事件绑定"><a href="#互斥事件绑定" class="headerlink" title="互斥事件绑定"></a>互斥事件绑定</h3><p>自基础库版本 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">2.8.2</a> 起，除 <code>bind</code> 和 <code>catch</code> 外，还可以使用 <code>mut-bind</code> 来绑定事件。一个 <code>mut-bind</code> 触发后，如果事件冒泡到其他节点上，其他节点上的 <code>mut-bind</code> 绑定函数不会被触发，但 <code>bind</code> 绑定函数和 <code>catch</code> 绑定函数依旧会被触发。</p>
+<p>换而言之，所有 <code>mut-bind</code> 是“互斥”的，只会有其中一个绑定函数被触发。同时，它完全不影响 <code>bind</code> 和 <code>catch</code> 的绑定效果。</p>
+<p>例如在下边这个例子中，点击 inner view 会先后调用 <code>handleTap3</code> 和 <code>handleTap2</code> ，点击 middle view 会调用 <code>handleTap2</code> 和 <code>handleTap1</code> 。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">id</span>=<span class="string">&quot;outer&quot;</span> <span class="attr">mut-bind:tap</span>=<span class="string">&quot;handleTap1&quot;</span>&gt;</span></span><br><span class="line">  outer view</span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">id</span>=<span class="string">&quot;middle&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;handleTap2&quot;</span>&gt;</span></span><br><span class="line">    middle view</span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">id</span>=<span class="string">&quot;inner&quot;</span> <span class="attr">mut-bind:tap</span>=<span class="string">&quot;handleTap3&quot;</span>&gt;</span> inner view <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="事件的捕获阶段"><a href="#事件的捕获阶段" class="headerlink" title="事件的捕获阶段"></a>事件的捕获阶段</h3><p>自基础库版本 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">1.5.0</a> 起，触摸类事件支持捕获阶段。捕获阶段位于冒泡阶段之前，且在捕获阶段中，事件到达节点的顺序与冒泡阶段恰好相反。需要在捕获阶段监听事件时，可以采用<code>capture-bind</code>、<code>capture-catch</code>关键字，后者将中断捕获阶段和取消冒泡阶段。</p>
+<p>在下面的代码中，点击 inner view 会先后调用<code>handleTap2</code>、<code>handleTap4</code>、<code>handleTap3</code>、<code>handleTap1</code>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;view</span><br><span class="line">  id=&quot;outer&quot;</span><br><span class="line">  bind:touchstart=&quot;handleTap1&quot;</span><br><span class="line">  capture-bind:touchstart=&quot;handleTap2&quot;</span><br><span class="line">&gt;</span><br><span class="line">  outer view</span><br><span class="line">  &lt;view</span><br><span class="line">    id=&quot;inner&quot;</span><br><span class="line">    bind:touchstart=&quot;handleTap3&quot;</span><br><span class="line">    capture-bind:touchstart=&quot;handleTap4&quot;</span><br><span class="line">  &gt;</span><br><span class="line">    inner view</span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="获取界面上的节点信息"><a href="#获取界面上的节点信息" class="headerlink" title="获取界面上的节点信息"></a>获取界面上的节点信息</h2><h3 id="WXML-节点信息"><a href="#WXML-节点信息" class="headerlink" title="WXML 节点信息"></a>WXML 节点信息</h3><p><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/wxml/wx.createSelectorQuery.html">节点信息查询 API</a> 可以用于获取节点属性、样式、在界面上的位置等信息。</p>
+<p>最常见的用法是使用这个接口来查询某个节点的当前位置，以及界面的滚动位置。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> query = wx.createSelectorQuery();</span><br><span class="line">query.select(<span class="string">&quot;#the-id&quot;</span>).boundingClientRect(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">  res.top; <span class="comment">// #the-id 节点的上边界坐标（相对于显示区域）</span></span><br><span class="line">&#125;);</span><br><span class="line">query.selectViewport().scrollOffset(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">  res.scrollTop; <span class="comment">// 显示区域的竖直滚动位置</span></span><br><span class="line">&#125;);</span><br><span class="line">query.exec();</span><br></pre></td></tr></table></figure>
+<p>上述示例中， <code>#the-id</code> 是一个节点选择器，与 CSS 的选择器相近但略有区别，请参见 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/wxml/SelectorQuery.select.html">SelectorQuery.select</a> 的相关说明。</p>
+<p>在自定义组件或包含自定义组件的页面中，推荐使用 <code>this.createSelectorQuery</code> 来代替 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/wxml/wx.createSelectorQuery.html">wx.createSelectorQuery</a> ，这样可以确保在正确的范围内选择节点。</p>
+<h3 id="WXML-节点布局相交状态"><a href="#WXML-节点布局相交状态" class="headerlink" title="WXML 节点布局相交状态"></a>WXML 节点布局相交状态</h3><p><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/wxml/wx.createIntersectionObserver.html">节点布局相交状态 API</a> 可用于监听两个或多个组件节点在布局位置上的相交状态。这一组 API 常常可以用于推断某些节点是否可以被用户看见、有多大比例可以被用户看见。</p>
+<p>这个 API 主要是为了给小程序的互动提供更多的配置，比如 H5 中的拖放功能就可以和这个 API 进行搭配使用。</p>
+<p>这一组 API 涉及的主要概念如下。</p>
+<ul>
+<li>参照节点：监听的参照节点，取它的布局区域作为参照区域。如果有多个参照节点，则会取它们布局区域的 <strong>交集</strong> 作为参照区域。页面显示区域也可作为参照区域之一。</li>
+<li>目标节点：监听的目标，默认只能是一个节点（使用 <code>selectAll</code> 选项时，可以同时监听多个节点）。</li>
+<li>相交区域：目标节点的布局区域与参照区域的相交区域。</li>
+<li>相交比例：相交区域占参照区域的比例。</li>
+<li>阈值：相交比例如果达到阈值，则会触发监听器的回调函数。阈值可以有多个。</li>
+</ul>
+<p>以下示例代码可以在目标节点（用选择器 <code>.target-class</code> 指定）每次进入或离开页面显示区域时，触发回调函数。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  onLoad: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    wx.createIntersectionObserver()</span><br><span class="line">      .relativeToViewport()</span><br><span class="line">      .observe(<span class="string">&quot;.target-class&quot;</span>, <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        res.id; <span class="comment">// 目标节点 id</span></span><br><span class="line">        res.dataset; <span class="comment">// 目标节点 dataset</span></span><br><span class="line">        res.intersectionRatio; <span class="comment">// 相交区域占目标节点的布局区域的比例</span></span><br><span class="line">        res.intersectionRect; <span class="comment">// 相交区域</span></span><br><span class="line">        res.intersectionRect.left; <span class="comment">// 相交区域的左边界坐标</span></span><br><span class="line">        res.intersectionRect.top; <span class="comment">// 相交区域的上边界坐标</span></span><br><span class="line">        res.intersectionRect.width; <span class="comment">// 相交区域的宽度</span></span><br><span class="line">        res.intersectionRect.height; <span class="comment">// 相交区域的高度</span></span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以下示例代码可以在目标节点（用选择器 <code>.target-class</code> 指定）与参照节点（用选择器 <code>.relative-class</code> 指定）在页面显示区域内相交或相离，且相交或相离程度达到目标节点布局区域的 20%和 50%时，触发回调函数。</p>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  onLoad: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    wx.createIntersectionObserver(<span class="built_in">this</span>, &#123;</span><br><span class="line">      thresholds: [<span class="number">0.2</span>, <span class="number">0.5</span>],</span><br><span class="line">    &#125;)</span><br><span class="line">      .relativeTo(<span class="string">&quot;.relative-class&quot;</span>)</span><br><span class="line">      .relativeToViewport()</span><br><span class="line">      .observe(<span class="string">&quot;.target-class&quot;</span>, <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        res.intersectionRatio; <span class="comment">// 相交区域占目标节点的布局区域的比例</span></span><br><span class="line">        res.intersectionRect; <span class="comment">// 相交区域</span></span><br><span class="line">        res.intersectionRect.left; <span class="comment">// 相交区域的左边界坐标</span></span><br><span class="line">        res.intersectionRect.top; <span class="comment">// 相交区域的上边界坐标</span></span><br><span class="line">        res.intersectionRect.width; <span class="comment">// 相交区域的宽度</span></span><br><span class="line">        res.intersectionRect.height; <span class="comment">// 相交区域的高度</span></span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>注意：与页面显示区域的相交区域并不准确代表用户可见的区域，因为参与计算的区域是“布局区域”，布局区域可能会在绘制时被其他节点裁剪隐藏（如遇祖先节点中 overflow 样式为 hidden 的节点）或遮盖（如遇 fixed 定位的节点）。</p>
+<h2 id="组件间通信与事件"><a href="#组件间通信与事件" class="headerlink" title="组件间通信与事件"></a>组件间通信与事件</h2><h3 id="组件间通信"><a href="#组件间通信" class="headerlink" title="组件间通信"></a>组件间通信</h3><p>组件间的基本通信方式有以下几种。</p>
+<ul>
+<li><p>WXML 数据绑定：用于父组件向子组件的指定属性设置数据，仅能设置 JSON 兼容数据（自基础库版本 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">2.0.9</a> 开始，还可以在数据中包含函数）。具体在 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/wxml-wxss.html">组件模板和样式</a> 章节中介绍。</p>
+</li>
+<li><p>事件：用于子组件向父组件传递数据，可以传递任意数据。</p>
+<blockquote>
+<p>事件本身是通过冒泡和捕获阶段进行传递的，如果事件设置了不冒泡，那么父组件自然是监听不到这个事件的。</p>
+</blockquote>
+</li>
+<li><p>如果以上两种方式不足以满足需要，父组件还可以通过 <code>this.selectComponent</code> 方法获取子组件实例对象，这样就可以直接访问组件的任意数据和方法。</p>
+</li>
+</ul>
+<h3 id="触发事件"><a href="#触发事件" class="headerlink" title="触发事件"></a>触发事件</h3><p>自定义组件触发事件时，需要使用 <code>triggerEvent</code> 方法，指定事件名、detail 对象和事件选项：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 页面 page.wxml</span><br><span class="line"><span class="tag">&lt;<span class="name">another-component</span> <span class="attr">bindcustomevent</span>=<span class="string">&quot;pageEventListener1&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">my-component</span> <span class="attr">bindcustomevent</span>=<span class="string">&quot;pageEventListener2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">another-component</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 组件 another-component.wxml</span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">bindcustomevent</span>=<span class="string">&quot;anotherEventListener&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 组件 my-component.wxml</span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">bindcustomevent</span>=<span class="string">&quot;myEventListener&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组件 my-component.js</span></span><br><span class="line">Component(&#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    onTap: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">this</span>.triggerEvent(<span class="string">&quot;customevent&quot;</span>, &#123;&#125;); <span class="comment">// 只会触发 pageEventListener2</span></span><br><span class="line">      <span class="built_in">this</span>.triggerEvent(<span class="string">&quot;customevent&quot;</span>, &#123;&#125;, &#123; <span class="attr">bubbles</span>: <span class="literal">true</span> &#125;); <span class="comment">// 会依次触发 pageEventListener2 、 pageEventListener1</span></span><br><span class="line">      <span class="built_in">this</span>.triggerEvent(<span class="string">&quot;customevent&quot;</span>, &#123;&#125;, &#123; <span class="attr">bubbles</span>: <span class="literal">true</span>, <span class="attr">composed</span>: <span class="literal">true</span> &#125;); <span class="comment">// 会依次触发 pageEventListener2 、 anotherEventListener 、 pageEventListener1</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项名</th>
+<th align="left">类型</th>
+<th align="left">是否必填</th>
+<th align="left">默认值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">bubbles</td>
+<td align="left">Boolean</td>
+<td align="left">否</td>
+<td align="left">false</td>
+<td align="left">事件是否冒泡</td>
+</tr>
+<tr>
+<td align="left">composed</td>
+<td align="left">Boolean</td>
+<td align="left">否</td>
+<td align="left">false</td>
+<td align="left">事件是否可以穿越组件边界，为 false 时，事件将只能在引用组件的节点树上触发，不进入其他任何组件内部</td>
+</tr>
+<tr>
+<td align="left">capturePhase</td>
+<td align="left">Boolean</td>
+<td align="left">否</td>
+<td align="left">false</td>
+<td align="left">事件是否拥有捕获阶段</td>
+</tr>
+</tbody></table>
+<h3 id="获取组件实例"><a href="#获取组件实例" class="headerlink" title="获取组件实例"></a>获取组件实例</h3><p>可在父组件里调用 <code>this.selectComponent</code> ，获取子组件的实例对象。（插件的自定义组件将返回 <code>null</code>）</p>
+<p>调用时需要传入一个匹配选择器 <code>selector</code>，如：<code>this.selectComponent(&quot;.my-component&quot;)</code>。</p>
+<p>父组件将会获取 <code>class</code> 为 <code>my-component</code> 的子组件实例对象，即子组件的 <code>this</code> 。</p>
+<p>若需要自定义 <code>selectComponent</code> 返回的数据，可使用内置 <code>behavior</code>: <code>wx://component-export</code></p>
+<h2 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h2><p>可用的全部生命周期如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th align="left">生命周期</th>
+<th align="left">参数</th>
+<th align="left">描述</th>
+<th align="left">最低版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">created</td>
+<td align="left">无</td>
+<td align="left">在组件实例刚刚被创建时执行</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">1.6.3</a></td>
+</tr>
+<tr>
+<td align="left">attached</td>
+<td align="left">无</td>
+<td align="left">在组件实例进入页面节点树时执行</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">1.6.3</a></td>
+</tr>
+<tr>
+<td align="left">ready</td>
+<td align="left">无</td>
+<td align="left">在组件在视图层布局完成后执行</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">1.6.3</a></td>
+</tr>
+<tr>
+<td align="left">moved</td>
+<td align="left">无</td>
+<td align="left">在组件实例被移动到节点树另一个位置时执行</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">1.6.3</a></td>
+</tr>
+<tr>
+<td align="left">detached</td>
+<td align="left">无</td>
+<td align="left">在组件实例被从页面节点树移除时执行</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">1.6.3</a></td>
+</tr>
+<tr>
+<td align="left">error</td>
+<td align="left"><code>Object Error</code></td>
+<td align="left">每当组件方法抛出错误时执行</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">2.4.1</a></td>
+</tr>
+</tbody></table>
+<h3 id="组件所在页面的生命周期"><a href="#组件所在页面的生命周期" class="headerlink" title="组件所在页面的生命周期"></a>组件所在页面的生命周期</h3><p>还有一些特殊的生命周期，它们并非与组件有很强的关联，但有时组件需要获知，以便组件内部处理。这样的生命周期称为“组件所在页面的生命周期”，在 <code>pageLifetimes</code> 定义段中定义。其中可用的生命周期包括：</p>
+<table>
+<thead>
+<tr>
+<th align="left">生命周期</th>
+<th align="left">参数</th>
+<th align="left">描述</th>
+<th align="left">最低版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">show</td>
+<td align="left">无</td>
+<td align="left">组件所在的页面被展示时执行</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">2.2.3</a></td>
+</tr>
+<tr>
+<td align="left">hide</td>
+<td align="left">无</td>
+<td align="left">组件所在的页面被隐藏时执行</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">2.2.3</a></td>
+</tr>
+<tr>
+<td align="left">resize</td>
+<td align="left"><code>Object Size</code></td>
+<td align="left">组件所在的页面尺寸变化时执行</td>
+<td align="left"><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">2.4.0</a></td>
+</tr>
+</tbody></table>
+<h2 id="behaviors"><a href="#behaviors" class="headerlink" title="behaviors"></a>behaviors</h2><p><code>behaviors</code> 是用于组件间代码共享的特性，类似于一些编程语言中的 “mixins” 或 “traits”。</p>
+<p>每个 <code>behavior</code> 可以包含一组属性、数据、生命周期函数和方法。<strong>组件引用它时，它的属性、数据和方法会被合并到组件中，生命周期函数也会在对应时机被调用。</strong> 每个组件可以引用多个 <code>behavior</code> ，<code>behavior</code> 也可以引用其它 <code>behavior</code> 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// my-behavior.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = Behavior(&#123;</span><br><span class="line">  behaviors: [],</span><br><span class="line">  properties: &#123;</span><br><span class="line">    myBehaviorProperty: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    myBehaviorData: &#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  attached: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    myBehaviorMethod: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// behavior 是通过 Behavior 对象建立的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// my-component.js</span></span><br><span class="line"><span class="keyword">var</span> myBehavior = <span class="built_in">require</span>(<span class="string">&quot;my-behavior&quot;</span>);</span><br><span class="line">Component(&#123;</span><br><span class="line">  behaviors: [myBehavior],</span><br><span class="line">  properties: &#123;</span><br><span class="line">    myProperty: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    myData: <span class="string">&quot;my-component-data&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;[my-component] created&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  attached: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;[my-component] attached&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  ready: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;[my-component] ready&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    myMethod: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&quot;[my-component] log by myMethod&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在上例中， <code>my-component</code> 组件定义中加入了 <code>my-behavior</code>，</p>
+<p>而 <code>my-behavior</code> 结构为：</p>
+<ul>
+<li>属性：<code>myBehaviorProperty</code></li>
+<li>数据字段：<code>myBehaviorData</code></li>
+<li>方法：<code>myBehaviorMethod</code></li>
+<li>生命周期函数：<code>attached</code>、<code>created</code>、<code>ready</code></li>
+</ul>
+<p>这将使 <code>my-component</code> 最终结构为：</p>
+<ul>
+<li>属性：<code>myBehaviorProperty</code>、<code>myProperty</code></li>
+<li>数据字段：<code>myBehaviorData</code>、<code>myData</code></li>
+<li>方法：<code>myBehaviorMethod</code>、<code>myMethod</code></li>
+<li>生命周期函数：<code>attached</code>、<code>created</code>、<code>ready</code></li>
+</ul>
+<p>当组件触发生命周期时，上例生命周期函数执行顺序为：</p>
+<ol>
+<li><code>[my-behavior] created</code></li>
+<li><code>[my-component] created</code></li>
+<li><code>[my-behavior] attached</code></li>
+<li><code>[my-component] attached</code></li>
+<li><code>[my-behavior] ready</code></li>
+<li><code>[my-component] ready</code></li>
+</ol>
+<p>始终是先执行 <code>my-behavior</code> 初始化。</p>
+<h3 id="同名字段的覆盖和组合规则"><a href="#同名字段的覆盖和组合规则" class="headerlink" title="同名字段的覆盖和组合规则"></a>同名字段的覆盖和组合规则</h3><p>组件和它引用的 <code>behavior</code> 中可以包含同名的字段，对这些字段的处理方法如下：</p>
+<ul>
+<li>如果有同名的属性 (properties) 或方法 (methods)：<ol>
+<li>若组件本身有这个属性或方法，则组件的属性或方法会覆盖 <code>behavior</code> 中的同名属性或方法；</li>
+<li>若组件本身无这个属性或方法，则在组件的 <code>behaviors</code> 字段中定义靠后的 <code>behavior</code> 的属性或方法会覆盖靠前的同名属性或方法；</li>
+<li>在 2 的基础上，若存在嵌套引用 <code>behavior</code> 的情况，则规则为：<code>父 behavior</code> 覆盖 <code>子 behavior</code> 中的同名属性或方法。</li>
+</ol>
+</li>
+<li>如果有同名的数据字段 (data)：<ul>
+<li>若同名的数据字段都是对象类型，会进行对象合并；</li>
+<li>其余情况会进行数据覆盖，覆盖规则为：组件 &gt; <code>父 behavior</code> &gt; <code>子 behavior</code> 、 <code>靠后的 behavior</code> &gt; <code>靠前的 behavior</code>。（优先级高的覆盖优先级低的，最大的为优先级最高）</li>
+</ul>
+</li>
+<li>生命周期函数不会相互覆盖，而是在对应触发时机被逐个调用：<ul>
+<li>对于不同的生命周期函数之间，遵循组件生命周期函数的执行顺序；</li>
+<li>对于同种生命周期函数，遵循如下规则：<ul>
+<li><code>behavior</code> 优先于组件执行；</li>
+<li><code>子 behavior</code> 优先于 <code>父 behavior</code> 执行；</li>
+<li><code>靠前的 behavior</code> 优先于 <code>靠后的 behavior</code> 执行；</li>
+</ul>
+</li>
+<li>如果同一个 <code>behavior</code> 被一个组件多次引用，它定义的生命周期函数只会被执行一次。</li>
+</ul>
+</li>
+</ul>
+<h2 id="组件间关系"><a href="#组件间关系" class="headerlink" title="组件间关系"></a>组件间关系</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E5%89%8D%E7%AB%AF/" rel="tag"># 学习前端</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/08/Typescript%E5%AD%A6%E4%B9%A0/" rel="prev" title="Typescript 学习">
+      <i class="fa fa-chevron-left"></i> Typescript 学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/23/%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C/" rel="next" title="工作经验">
+      工作经验 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WXML"><span class="nav-number">1.</span> <span class="nav-text">WXML</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="nav-number">1.1.</span> <span class="nav-text">数据绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93"><span class="nav-number">1.2.</span> <span class="nav-text">列表渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wx-for"><span class="nav-number">1.2.1.</span> <span class="nav-text">wx:for</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#block-wx-for"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">block wx:for</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wx-key"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">wx:key</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93"><span class="nav-number">1.3.</span> <span class="nav-text">条件渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wx-if"><span class="nav-number">1.3.1.</span> <span class="nav-text">wx:if</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#block-wx-if"><span class="nav-number">1.3.2.</span> <span class="nav-text">block wx:if</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#wx-if-vs-hidden"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">wx:if vs hidden</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.4.</span> <span class="nav-text">模板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.4.1.</span> <span class="nav-text">定义模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.4.2.</span> <span class="nav-text">使用模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">1.5.</span> <span class="nav-text">引用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#import"><span class="nav-number">1.5.1.</span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.5.2.</span> <span class="nav-text">import 的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include"><span class="nav-number">1.5.3.</span> <span class="nav-text">include</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%85%B3-XML-%E7%9A%84%E4%BA%8B%E6%83%85"><span class="nav-number">1.6.</span> <span class="nav-text">有关 XML 的事情</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WXS"><span class="nav-number">2.</span> <span class="nav-text">WXS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.</span> <span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#require-%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.1.</span> <span class="nav-text">require 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">2.2.1.</span> <span class="nav-text">概念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6"><span class="nav-number">3.</span> <span class="nav-text">框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">3.1.</span> <span class="nav-text">页面生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E7%9B%91%E5%90%AC%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">页面监听函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E9%A1%B5%E9%9D%A2%E4%B8%AD%E4%BD%BF%E7%94%A8-behaviors"><span class="nav-number">3.3.</span> <span class="nav-text">在页面中使用 behaviors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E8%B7%AF%E7%94%B1"><span class="nav-number">3.4.</span> <span class="nav-text">页面路由</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E6%A0%88"><span class="nav-number">3.4.1.</span> <span class="nav-text">页面栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%96%B9%E5%BC%8F"><span class="nav-number">3.4.2.</span> <span class="nav-text">路由方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="nav-number">3.5.</span> <span class="nav-text">模块化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A"><span class="nav-number">3.6.</span> <span class="nav-text">事件绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%88%86%E7%B1%BB"><span class="nav-number">3.6.1.</span> <span class="nav-text">事件分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A"><span class="nav-number">3.6.2.</span> <span class="nav-text">普通事件绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%B9%B6%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="nav-number">3.6.3.</span> <span class="nav-text">绑定并阻止事件冒泡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%92%E6%96%A5%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A"><span class="nav-number">3.6.4.</span> <span class="nav-text">互斥事件绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%8D%95%E8%8E%B7%E9%98%B6%E6%AE%B5"><span class="nav-number">3.6.5.</span> <span class="nav-text">事件的捕获阶段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%95%8C%E9%9D%A2%E4%B8%8A%E7%9A%84%E8%8A%82%E7%82%B9%E4%BF%A1%E6%81%AF"><span class="nav-number">3.7.</span> <span class="nav-text">获取界面上的节点信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WXML-%E8%8A%82%E7%82%B9%E4%BF%A1%E6%81%AF"><span class="nav-number">3.7.1.</span> <span class="nav-text">WXML 节点信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WXML-%E8%8A%82%E7%82%B9%E5%B8%83%E5%B1%80%E7%9B%B8%E4%BA%A4%E7%8A%B6%E6%80%81"><span class="nav-number">3.7.2.</span> <span class="nav-text">WXML 节点布局相交状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E9%97%B4%E9%80%9A%E4%BF%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.8.</span> <span class="nav-text">组件间通信与事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">3.8.1.</span> <span class="nav-text">组件间通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.8.2.</span> <span class="nav-text">触发事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%BB%84%E4%BB%B6%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.8.3.</span> <span class="nav-text">获取组件实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">3.9.</span> <span class="nav-text">组件生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E6%89%80%E5%9C%A8%E9%A1%B5%E9%9D%A2%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">3.9.1.</span> <span class="nav-text">组件所在页面的生命周期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#behaviors"><span class="nav-number">3.10.</span> <span class="nav-text">behaviors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E5%90%8D%E5%AD%97%E6%AE%B5%E7%9A%84%E8%A6%86%E7%9B%96%E5%92%8C%E7%BB%84%E5%90%88%E8%A7%84%E5%88%99"><span class="nav-number">3.10.1.</span> <span class="nav-text">同名字段的覆盖和组合规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E9%97%B4%E5%85%B3%E7%B3%BB"><span class="nav-number">3.11.</span> <span class="nav-text">组件间关系</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Pisho"
+      src="/images/icon.jpg">
+  <p class="site-author-name" itemprop="name">Pisho</p>
+  <div class="site-description" itemprop="description">本站看运气访问进来,主要是本人的一些学习笔记,一般没有什么干货。不过还是希望能够帮助你学习到什么。由于域名到期，所以换成了 MOE 二次元域名。😄</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/PishoLu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;PishoLu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:luhongyu.hi@qq.com" title="E-Mail → mailto:luhongyu.hi@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://pisho.me/images/wechatfriend.png" title="Wechat → https:&#x2F;&#x2F;pisho.me&#x2F;images&#x2F;wechatfriend.png" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://steamcommunity.com/profiles/76561198212983353/" title="Steam → https:&#x2F;&#x2F;steamcommunity.com&#x2F;profiles&#x2F;76561198212983353&#x2F;" rel="noopener" target="_blank"><i class="fab fa-steam fa-fw"></i>Steam</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pisho</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
