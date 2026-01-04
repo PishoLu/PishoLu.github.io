@@ -4,12 +4,12 @@ layout: home
 
 hero:
   name: "PishoLu Blog"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  text: ""
+  tagline:
   actions:
     - theme: brand
-      text: 2025 Blogs
-      link: /2025/关于内存在JS中的用法
+      text: 2026 Blogs
+      link: /2026/记录一下插件里面的坑
 
 head:
   - - link
