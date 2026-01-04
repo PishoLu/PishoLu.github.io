@@ -10,6 +10,9 @@ hero:
     - theme: brand
       text: 2026 Blogs
       link: /2026/记录一下插件里面的坑
+    - theme: brand
+      text: 2025 Blogs
+      link: /2025/日本行log
 
 head:
   - - link

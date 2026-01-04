@@ -1,4 +1,3 @@
-import { defineConfig } from "vitepress";
 import mathjax3 from "markdown-it-mathjax3";
 import { withMermaid } from "vitepress-plugin-mermaid";
 
@@ -14,6 +13,10 @@ export default withMermaid({
 
     sidebar: [
       {
+        text: "2025",
+        items: [{ text: "日本行log", link: "/2025/日本行log.md" }],
+      },
+      {
         text: "2026",
         items: [
           {
@@ -26,14 +29,14 @@ export default withMermaid({
 
     socialLinks: [{ icon: "github", link: "https://github.com/PishoLu" }],
     markdown: {
-      config: (md) => {
+      config: (md: any) => {
         md.use(mathjax3);
       },
     },
     vue: {
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => customElements.includes(tag),
+          isCustomElement: (tag: any) => customElements.includes(tag),
         },
       },
     },
